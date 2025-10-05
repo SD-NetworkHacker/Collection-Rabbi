@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rabbi Bima Yasrahoul - Administration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Admin header with logout -->
+    <div class="app-header">
+        <div class="header-content">
+            <div class="header-info">
+                <span class="role-badge admin">Administrateur</span>
+                <span id="userNameDisplay" class="user-name"></span>
+            </div>
+            <button id="logoutBtn" class="btn-logout">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                Déconnexion
+            </button>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="hero-content">
+            <div class="arabic-text">رَبِّ بِمَا يَسْرَحُولْ</div>
+            <h1 class="main-title">Rabbi Bima Yasrahoul</h1>
+            <p class="hero-subtitle">Tableau de bord administrateur</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Total section -->
+        <section class="total-section">
+            <div class="total-card">
+                <div class="total-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <div class="total-content">
+                    <div class="total-label">Total Collectif</div>
+                    <div id="totalCount" class="total-value">0</div>
+                    <div class="total-sublabel">invocations comptabilisées</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin dashboard section -->
+        <section class="admin-dashboard">
+            <div class="card-header">
+                <h2>Tableau de bord des Administrateurs</h2>
+                <p class="card-description">Résumé des contributions des admins</p>
+            </div>
+            <div id="adminStatsContainer" class="admin-stats-grid"></div>
+        </section>
+
+        <div class="main-grid">
+            <!-- Updated submission form to use admin's name by default -->
+            <section class="submission-card">
+                <div class="card-header">
+                    <h2>Ajouter des Invocations</h2>
+                    <p class="card-description">Contribuez au compteur collectif</p>
+                </div>
+                <form id="countForm" class="count-form">
+                    <div class="form-group">
+                        <label for="userName">Nom du contributeur</label>
+                        <input 
+                            type="text" 
+                            id="userName" 
+                            placeholder="Entrez le nom" 
+                            required
+                        >
+                        <small style="color: var(--color-text-secondary); margin-top: 0.5rem; display: block;">
+                            Par défaut, votre nom admin sera utilisé
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="countValue">Nombre d'invocations</label>
+                        <input 
+                            type="number" 
+                            id="countValue" 
+                            placeholder="Combien de fois ?" 
+                            min="1"
+                            value="1"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="quick-buttons">
+                        <button type="button" class="btn-quick" data-value="1">+1</button>
+                        <button type="button" class="btn-quick" data-value="10">+10</button>
+                        <button type="button" class="btn-quick" data-value="33">+33</button>
+                        <button type="button" class="btn-quick" data-value="100">+100</button>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">
+                        <span>Ajouter les invocations</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Stats section -->
+            <section class="stats-card">
+                <div class="card-header">
+                    <h2>Contributeurs</h2>
+                    <p class="card-description">Statistiques par personne</p>
+                </div>
+                <div id="statsContainer" class="stats-grid"></div>
+            </section>
+        </div>
+
+        <!-- History section with delete functionality -->
+        <section class="history-card">
+            <div class="card-header-row">
+                <div>
+                    <h2>Historique des Contributions</h2>
+                    <p class="card-description">Toutes les invocations enregistrées</p>
+                </div>
+                <div class="admin-actions">
+                    <button id="clearBtn" class="btn-clear">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                        Effacer tout
+                    </button>
+                </div>
+            </div>
+            <div id="historyContainer" class="history-list"></div>
+        </section>
+    </div>
+
+    <!-- Added modal for editing contributions -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Modifier la contribution</h3>
+                <button class="modal-close" id="closeEditModal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form id="editForm">
+                <div class="form-group">
+                    <label for="editUserName">Nom du contributeur</label>
+                    <input type="text" id="editUserName" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="editValue">Nouveau total</label>
+                    <input type="number" id="editValue" min="0" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelEdit">Annuler</button>
+                    <button type="submit" class="btn-submit">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

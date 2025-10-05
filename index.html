@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rabbi Bima Yasrahoul - Connexion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-screen">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="arabic-text-login">رَبِّ بِمَا يَسْرَحُولْ</div>
+                <h1 class="login-title">Rabbi Bima Yasrahoul</h1>
+                <p class="login-subtitle">Choisissez votre mode d'accès</p>
+                
+                <div class="role-buttons">
+                    <button id="adminLoginBtn" class="role-btn admin-btn">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                        </svg>
+                        <span>Administrateur</span>
+                        <small>Accès complet</small>
+                    </button>
+                    
+                    <button id="contributorLoginBtn" class="role-btn contributor-btn">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        <span>Contributeur</span>
+                        <small>Entrez votre nom</small>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     Added name input field for admin before password 
+    <div id="adminPasswordModal" class="modal">
+        <div class="modal-content">
+            <h2>Accès Administrateur</h2>
+            <p class="modal-description">Entrez votre nom et mot de passe</p>
+            <form id="adminPasswordForm">
+                <input type="text" id="adminName" placeholder="Votre nom" required minlength="2">
+                <input type="password" id="adminPassword" placeholder="Mot de passe" required>
+                <div class="modal-buttons">
+                    <button type="button" id="cancelAdminBtn" class="btn-secondary">Annuler</button>
+                    <button type="submit" class="btn-primary">Connexion</button>
+                </div>
+            </form>
+            <p class="password-hint">Mot de passe par défaut: admin123</p>
+        </div>
+    </div>
+
+    <div id="contributorNameModal" class="modal">
+        <div class="modal-content">
+            <h2>Connexion Contributeur</h2>
+            <p class="modal-description">Entrez votre nom pour commencer</p>
+            <form id="contributorNameForm">
+                <input type="text" id="contributorName" placeholder="Votre nom" required minlength="2">
+                <div class="modal-buttons">
+                    <button type="button" id="cancelContributorBtn" class="btn-secondary">Annuler</button>
+                    <button type="submit" class="btn-primary">Continuer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>
